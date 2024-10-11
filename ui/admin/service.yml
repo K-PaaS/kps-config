@@ -1,0 +1,21 @@
+#
+#
+# kps-web-admin service.yaml
+#
+# 
+apiVersion: v1
+kind: Service
+metadata:
+  name: kps-web-admin
+  namespace: kps
+  labels:
+    app: kps-web-admin
+spec:
+  ports:
+    - port: 8090
+      protocol: TCP
+      targetPort: 8090
+  selector:
+    app: kps-web-admin
+  type: NodePort
+

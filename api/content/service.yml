@@ -1,0 +1,21 @@
+#
+#
+# kps-api-content service.yaml
+#
+# 
+apiVersion: v1
+kind: Service
+metadata:
+  name: kps-api-content
+  namespace: kps
+  labels:
+    app: kps-api-content
+spec:
+  ports:
+    - port: 9060
+      protocol: TCP
+      targetPort: 9060
+  selector:
+    app: kps-api-content
+  type: ClusterIP
+

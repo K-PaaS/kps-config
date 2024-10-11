@@ -1,0 +1,29 @@
+#
+#
+# kps-web-user deployment.yaml
+#
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kps-web-user
+  namespace: kps
+  labels:
+    app: kps-web-user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kps-web-user
+  template:
+    metadata:
+      labels:
+        app: kps-web-user
+    spec:
+      containers:
+      - name: kps-web-user
+        image: loopy456/kps-web-user:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+

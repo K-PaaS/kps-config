@@ -1,0 +1,22 @@
+#
+#
+# kps-web-user service.yaml
+#
+# 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kps-web-user
+  namespace: kps
+  labels:
+    app: kps-web-user
+spec:
+  ports:
+  - nodePort: 31808
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: kps-web-user
+  type: NodePort

@@ -1,0 +1,29 @@
+#
+#
+# kps-api-edu deployment.yaml
+#
+# 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kps-api-edu
+  namespace: kps
+  labels:
+    app: kps-api-edu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kps-api-edu
+  template:
+    metadata:
+      labels:
+        app: kps-api-edu
+    spec:
+      containers:
+      - name: kps-api-edu
+        image: loopy456/kps-api-edu:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9050
+

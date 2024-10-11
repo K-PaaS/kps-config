@@ -1,0 +1,29 @@
+#
+#
+# kps-api-business deployment.yaml
+#
+# 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kps-api-business
+  namespace: kps
+  labels:
+    app: kps-api-business
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kps-api-business
+  template:
+    metadata:
+      labels:
+        app: kps-api-business
+    spec:
+      containers:
+      - name: kps-api-business
+        image: q1648587/kps-api-business:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9040
+

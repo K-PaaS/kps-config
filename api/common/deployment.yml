@@ -1,0 +1,29 @@
+#
+#
+# kps-api-common deployment.yaml
+#
+# 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kps-api-common
+  namespace: kps
+  labels:
+    app: kps-api-common
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kps-api-common
+  template:
+    metadata:
+      labels:
+        app: kps-api-common
+    spec:
+      containers:
+      - name: kps-api-common
+        image: q1648587/kps-api-common:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9030
+

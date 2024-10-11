@@ -1,0 +1,28 @@
+#
+#
+# kps-zuul-gateway deployment.yaml
+#
+# 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kps-zuul-gateway
+  namespace: kps
+  labels:
+    app: kps-zuul-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kps-zuul-gateway
+  template:
+    metadata:
+      labels:
+        app: kps-zuul-gateway
+    spec:
+      containers:
+      - name: kps-zuul-gateway
+        image: q1648587/kps-zuul-gateway:latest
+        imagePullPolicy: Always
+

@@ -1,0 +1,21 @@
+#
+#
+# kps-api-common service.yaml
+#
+# 
+apiVersion: v1
+kind: Service
+metadata:
+  name: kps-api-common
+  namespace: kps
+  labels:
+    app: kps-api-common
+spec:
+  ports:
+    - port: 9030
+      protocol: TCP
+      targetPort: 9030
+  selector:
+    app: kps-api-common
+  type: ClusterIP
+

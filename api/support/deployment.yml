@@ -1,0 +1,29 @@
+#
+#
+# kps-api-support deployment.yaml
+#
+# 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kps-api-support
+  namespace: kps
+  labels:
+    app: kps-api-support
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kps-api-support
+  template:
+    metadata:
+      labels:
+        app: kps-api-support
+    spec:
+      containers:
+      - name: kps-api-support
+        image: loopy456/kps-api-support:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+

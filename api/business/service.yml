@@ -1,0 +1,22 @@
+#
+#
+# kps-api-business service.yaml
+#
+# 
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: kps-api-business
+  namespace: kps
+  labels:
+    app: kps-api-business
+spec:
+  ports:
+    - port: 9040
+      protocol: TCP
+      targetPort: 9040
+  selector:
+    app: kps-api-business
+  type: NodePort
+
