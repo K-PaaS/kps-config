@@ -23,6 +23,14 @@ spec:
     spec:
       containers:
       - name: kps-zuul-gateway
-        image: q1648587/kps-zuul-gateway:latest
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-zuul-gateway:1.0
         imagePullPolicy: Always
-
+        volumeMounts:
+        - mountPath: /var/vcap/data
+          name: backup-storage
+      volumes:
+      - name: backup-storage
+        persistentVolumeClaim:
+          clameName: backup-pv-claim
+      imagePullSecrets:
+        - name: ncp-container

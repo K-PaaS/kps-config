@@ -22,8 +22,17 @@ spec:
     spec:
       containers:
       - name: kps-api-content
-        image: q1648587/kps-api-content:latest
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-api-content:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 9060
+        volumeMounts:
+        - mountPath: /var/vcap/data
+          name: backup-storage
+      volumes:
+      - name: backup-storage
+        persistentVolumeClaim:
+          clameName: backup-pv-claim
+      imagePullSecrets:
+        - name: ncp-container
 

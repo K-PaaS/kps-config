@@ -22,8 +22,16 @@ spec:
     spec:
       containers:
       - name: kps-web-user
-        image: loopy456/kps-web-user:latest
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-web-user:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
-
+        volumeMounts:
+        - mountPath: /var/vcap/data
+          name: backup-storage
+      volumes:
+      - name: backup-storage
+        persistentVolumeClaim:
+          clameName: backup-pv-claim
+      imagePullSecrets:
+        - name: ncp-container
