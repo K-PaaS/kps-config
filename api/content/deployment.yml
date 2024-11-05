@@ -32,7 +32,7 @@ spec:
       volumes:
       - name: backup-storage
         persistentVolumeClaim:
-          clameName: backup-pv-claim
+          claimName: backup-pv-claim
       imagePullSecrets:
         - name: ncp-container
 
