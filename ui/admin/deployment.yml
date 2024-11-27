@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: kps-web-admin
-        image: kps-container-registry.ncr.gov-ntruss.com/kps-web-admin:1.8
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-web-admin:1.9
         imagePullPolicy: Always
         ports:
         - containerPort: 8090
