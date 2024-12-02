@@ -1,1 +1,37 @@
 #
+#
+# kps-web-user-en deployment.yaml
+#
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kps-web-user-en
+  namespace: kps
+  labels:
+    app: kps-web-user-en
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kps-web-user-en
+  template:
+    metadata:
+      labels:
+        app: kps-web-user-en
+    spec:
+      containers:
+      - name: kps-web-user-en
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-web-user-en:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8070
+        volumeMounts:
+        - mountPath: /var/vcap/data
+          name: backup-storage
+      volumes:
+      - name: backup-storage
+        persistentVolumeClaim:
+          claimName: backup-pv-claim
+      imagePullSecrets:
+        - name: ncp-container
