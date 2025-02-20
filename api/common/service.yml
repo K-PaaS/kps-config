@@ -7,7 +7,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kps-api-common
-  namespace: kps
+  namespace: kps2
   labels:
     app: kps-api-common
 spec:

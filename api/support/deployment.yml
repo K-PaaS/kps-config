@@ -7,7 +7,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kps-api-support
-  namespace: kps
+  namespace: kps2
   labels:
     app: kps-api-support
 spec:

@@ -7,7 +7,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kps-web-admin
-  namespace: kps
+  namespace: kps2
   labels:
     app: kps-web-admin
 spec:
