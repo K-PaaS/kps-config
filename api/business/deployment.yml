@@ -2,7 +2,7 @@
 #
 # kps-api-business deployment.yaml
 #
-# 
+# s
 apiVersion: apps/v1
 kind: Deployment
 metadata:
