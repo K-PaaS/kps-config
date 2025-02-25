@@ -26,13 +26,6 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 9050
-        volumeMounts:
-        - mountPath: /var/vcap/data
-          name: backup-storage
-      volumes:
-      - name: backup-storage
-        persistentVolumeClaim:
-          claimName: backup-pv-claim
       imagePullSecrets:
         - name: ncp-container
   
