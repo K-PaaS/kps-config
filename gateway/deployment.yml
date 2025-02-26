@@ -34,3 +34,8 @@ spec:
           claimName: backup-pv-claim
       imagePullSecrets:
         - name: ncp-container
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1  
+      maxSurge: 1         
