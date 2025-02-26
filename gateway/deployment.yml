@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: kps-zuul-gateway
-        image: kps-container-registry.ncr.gov-ntruss.com/kps-zuul-gateway:1.2
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-zuul-gateway:1.3
         imagePullPolicy: Always
       imagePullSecrets:
         - name: ncp-container
