@@ -25,5 +25,10 @@ spec:
       - name: kps-zuul-gateway
         image: kps-container-registry.ncr.gov-ntruss.com/kps-zuul-gateway:1.2
         imagePullPolicy: Always
+        ports:
+        - containerPort: 9021
+        env: 
+          - name: SERVER_PORT
+            value: "9021" 
       imagePullSecrets:
         - name: ncp-container
