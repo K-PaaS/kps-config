@@ -13,11 +13,10 @@ metadata:
     app: kps-api-edu
 spec:
   ports:
-  - nodePort: 31905
-    port: 9050
-    protocol: TCP
-    targetPort: 9050
+    -  port: 9050
+       protocol: TCP
+       targetPort: 9050
   selector:
     app: kps-api-edu
-  type: NodePort
+  type: clusterIP
 
