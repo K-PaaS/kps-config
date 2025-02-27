@@ -11,7 +11,7 @@ metadata:
   labels:
     app: kps-api-operate
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: kps-api-operate
@@ -35,3 +35,8 @@ spec:
           claimName: backup-pv-claim
       imagePullSecrets:
         - name: ncp-container
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavilable: 1
+      maxSurge: 1      
