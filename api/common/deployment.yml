@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: kps-api-common
-        image: kps-container-registry.ncr.gov-ntruss.com/kps-api-common:1.1
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-api-common:1.2
         imagePullPolicy: Always
         ports:
         - containerPort: 9030
