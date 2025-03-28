@@ -11,7 +11,7 @@ metadata:
   labels:
     app: kps-api-operate
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: kps-api-operate
