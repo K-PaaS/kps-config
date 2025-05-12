@@ -25,6 +25,13 @@ spec:
       - name: kps-zuul-gateway
         image: kps-container-registry.ncr.gov-ntruss.com/kps-zuul-gateway:1.8
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 1m
+            memory: 100Mi
+          limits:
+            cpu: 20m
+            memory: 300Mi                
         ports:
         - containerPort: 9021
         env: 

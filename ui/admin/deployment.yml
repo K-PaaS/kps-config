@@ -24,6 +24,13 @@ spec:
       - name: kps-web-admin
         image: kps-container-registry.ncr.gov-ntruss.com/kps-web-admin:1.18-dev
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            cpu: 80m
+            memory: 850Mi                
         ports:
         - containerPort: 8090
       imagePullSecrets:

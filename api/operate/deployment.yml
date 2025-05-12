@@ -24,6 +24,13 @@ spec:
       - name: kps-api-operate
         image: kps-container-registry.ncr.gov-ntruss.com/kps-api-operate:1.8-dev
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            cpu: 70m
+            memory: 800Mi                
         ports:
         - containerPort: 9070
       imagePullSecrets:
