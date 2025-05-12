@@ -25,6 +25,13 @@ spec:
       - name: kps-zuul-gateway
         image: kps-container-registry.ncr.gov-ntruss.com/kps-zuul-gateway:1.3
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 10m
+            memory: 700Mi
+          limits:
+            cpu: 50m
+            memory: 1800Mi                
         volumeMounts:
         - mountPath: /var/vcap/data
           name: backup-storage

@@ -24,6 +24,13 @@ spec:
       - name: kps-api-business
         image: kps-container-registry.ncr.gov-ntruss.com/kps-api-business:1.13
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 70m
+            memory: 750Mi
+          limits:
+            cpu: 105m
+            memory: 1900Mi                
         ports:
         - containerPort: 9040
         volumeMounts:

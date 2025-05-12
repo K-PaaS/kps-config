@@ -24,6 +24,13 @@ spec:
       - name: kps-api-edu
         image: kps-container-registry.ncr.gov-ntruss.com/kps-api-edu:1.43
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 80m
+            memory: 600Mi
+          limits:
+            cpu: 160m
+            memory: 1800Mi                
         ports:
         - containerPort: 9050
         volumeMounts:

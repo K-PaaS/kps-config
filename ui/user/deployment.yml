@@ -24,6 +24,13 @@ spec:
       - name: kps-web-user
         image: kps-container-registry.ncr.gov-ntruss.com/kps-web-user:1.42
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1400Mi
+          limits:
+            cpu: 210m
+            memory: 3000Mi
         ports:
         - containerPort: 8080
         volumeMounts:
@@ -34,5 +41,6 @@ spec:
         persistentVolumeClaim:
           claimName: backup-pv-claim
       imagePullSecrets:
-        - name: ncp-container       
+        - name: ncp-container
+
         
