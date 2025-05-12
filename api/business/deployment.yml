@@ -29,8 +29,8 @@ spec:
             cpu: 10m
             memory: 100Mi
           limits:
-            cpu: 60m
-            memory: 850Mi                
+            cpu: 120m
+            memory: 1400Mi                
         ports:
         - containerPort: 9040
       imagePullSecrets:

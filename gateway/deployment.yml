@@ -30,8 +30,8 @@ spec:
             cpu: 1m
             memory: 100Mi
           limits:
-            cpu: 20m
-            memory: 300Mi                
+            cpu: 100m
+            memory: 1500Mi                
         ports:
         - containerPort: 9021
         env: 
