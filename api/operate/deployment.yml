@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: kps-api-operate
-        image: kps-container-registry.ncr.gov-ntruss.com/kps-api-operate:1.8-dev
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-api-operate:1.9-dev
         imagePullPolicy: Always
         resources:
           requests:
