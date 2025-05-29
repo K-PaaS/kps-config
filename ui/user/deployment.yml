@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: kps-web-user
-        image: kps-container-registry.ncr.gov-ntruss.com/kps-web-user:1.91-dev
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-web-user:1.92-dev
         imagePullPolicy: Always
         resources:
           requests:
