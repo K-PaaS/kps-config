@@ -17,6 +17,8 @@ spec:
       app: kps-web-user
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/interceptionMode: TPROXY
       labels:
         app: kps-web-user
     spec:
