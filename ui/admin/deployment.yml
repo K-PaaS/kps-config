@@ -11,7 +11,12 @@ metadata:
   labels:
     app: kps-web-admin
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
       app: kps-web-admin
@@ -23,14 +28,7 @@ spec:
       containers:
       - name: kps-web-admin
         image: kps-container-registry.ncr.gov-ntruss.com/kps-web-admin:1.21-dev
-        imagePullPolicy: Always
-        resources:
-          requests:
-            cpu: 250m
-            memory: 800Mi
-          limits:
-            cpu: 510m
-            memory: 2000Mi                
+        imagePullPolicy: Always      
         ports:
         - containerPort: 8090
       imagePullSecrets:
