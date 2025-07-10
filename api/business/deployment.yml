@@ -2,7 +2,7 @@
 #
 # kps-api-business deployment.yaml
 #
-# s
+# 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,7 +11,12 @@ metadata:
   labels:
     app: kps-api-business
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
       app: kps-api-business
@@ -23,14 +28,7 @@ spec:
       containers:
       - name: kps-api-business
         image: kps-container-registry.ncr.gov-ntruss.com/kps-api-business:1.26-dev
-        imagePullPolicy: Always
-        resources:
-          requests:
-            cpu: 250m
-            memory: 500Mi
-          limits:
-            cpu: 500m
-            memory: 1400Mi                
+        imagePullPolicy: Always        
         ports:
         - containerPort: 9040
       imagePullSecrets:
