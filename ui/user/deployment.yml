@@ -11,28 +11,24 @@ metadata:
   labels:
     app: kps-web-user
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
       app: kps-web-user
   template:
     metadata:
-      annotations:
-        sidecar.istio.io/interceptionMode: TPROXY
       labels:
         app: kps-web-user
     spec:
       containers:
       - name: kps-web-user
         image: kps-container-registry.ncr.gov-ntruss.com/kps-web-user:1.104-dev
-        imagePullPolicy: Always
-        resources:
-          requests:
-            cpu: 250m
-            memory: 1000Mi
-          limits:
-            cpu: 500m
-            memory: 2500Mi                
+        imagePullPolicy: Always           
         ports:
         - containerPort: 8080
       imagePullSecrets:
