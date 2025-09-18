@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: kps-api-edu
-        image: kps-container-registry.ncr.gov-ntruss.com/kps-api-edu:1.12-dev
+        image: kps-container-registry.ncr.gov-ntruss.com/kps-api-edu:1.13-dev
         imagePullPolicy: Always
         resources:
           requests:
