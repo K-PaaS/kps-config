@@ -1,0 +1,256 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: httpbin-gateway-user-kps
+  namespace: kps
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - k-paas.or.kr
+        - www.k-paas.or.kr
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+
+    - hosts:
+        - k-paas.or.kr
+        - www.k-paas.or.kr
+      port:
+        name: https-kpaas
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: cert-kpaas-or-kr2
+        mode: SIMPLE
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-web-user-en-vs
+  namespace: kps
+spec:
+  gateways:
+    - httpbin-gateway-user-kps
+  hosts:
+    - k-paas.or.kr
+  http:
+    - match:
+        - uri:
+            prefix: /eng
+      route:
+        - destination:
+            host: kps-web-user-en.kps.svc.cluster.local
+            port:
+              number: 8070
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-web-user-vs
+  namespace: kps
+spec:
+  gateways:
+    - httpbin-gateway-user-kps
+  hosts:
+    - k-paas.or.kr
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: kps-web-user.kps.svc.cluster.local
+            port:
+              number: 8080
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-web-user-vs-www
+  namespace: kps
+spec:
+  gateways:
+    - httpbin-gateway-user-kps
+  hosts:
+    - www.k-paas.or.kr
+  http:
+    - match:
+        - uri:
+            prefix: /
+      redirect:
+        authority: k-paas.or.kr
+        uri: /
+---
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: kps-admin-gateway
+  namespace: kps
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - "*.k-paas.org"
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+    - hosts:
+        - "*.k-paas.org"
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: cert-k-paas-org
+        mode: SIMPLE
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-admin-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - admin.k-paas.org
+  http:
+    - match:
+        - uri:
+            prefix: /kpsadmin
+      route:
+        - destination:
+            host: kps-web-admin.kps.svc.cluster.local
+            port:
+              number: 8090
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-api-business-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - kps-api-business.kps.k-paas.org
+  http:
+    - name: kps-api-business
+      route:
+        - destination:
+            host: kps-api-business.kps.svc.cluster.local
+            port:
+              number: 9040
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-api-common-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - kps-api-common.kps.k-paas.org
+  http:
+    - name: kps-api-common
+      route:
+        - destination:
+            host: kps-api-common.kps.svc.cluster.local
+            port:
+              number: 9030
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-api-content-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - kps-api-content.kps.k-paas.org
+  http:
+    - name: kps-api-content
+      route:
+        - destination:
+            host: kps-api-content.kps.svc.cluster.local
+            port:
+              number: 9060
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-api-edu-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - kps-api-edu.kps.k-paas.org
+  http:
+    - name: kps-api-edu
+      route:
+        - destination:
+            host: kps-api-edu.kps.svc.cluster.local
+            port:
+              number: 9050
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-api-operate-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - kps-api-operate.kps.k-paas.org
+  http:
+    - name: kps-api-operate
+      route:
+        - destination:
+            host: kps-api-operate.kps.svc.cluster.local
+            port:
+              number: 9070
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-api-support-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - kps-api-support.kps.k-paas.org
+  http:
+    - name: kps-api-support
+      route:
+        - destination:
+            host: kps-api-support.kps.svc.cluster.local
+            port:
+              number: 9080
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-zuul-gateway-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - kps-zuul-gateway.kps.k-paas.org
+  http:
+    - name: kps-zuul-gateway
+      route:
+        - destination:
+            host: kps-zuul-gateway.kps.svc.cluster.local
+            port:
+              number: 9021

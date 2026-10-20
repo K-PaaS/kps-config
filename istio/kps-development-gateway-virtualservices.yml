@@ -1,0 +1,128 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: httpbin-gateway-user
+  namespace: kps
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - k-paas-dev01.kr
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-web-user-virtualservice
+  namespace: kps
+spec:
+  gateways:
+    - httpbin-gateway-user
+  hosts:
+    - k-paas-dev01.kr
+  http:
+    - name: kps-web-user
+      route:
+        - destination:
+            host: kps-web-user.kps.svc.cluster.local
+            port:
+              number: 8080
+---
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: httpbin-gateway-admin
+  namespace: kps
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - admin.k-paas-dev01.kr
+      port:
+        name: http-admin-dev
+        number: 80
+        protocol: HTTP
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: httpbin-admin
+  namespace: kps
+spec:
+  gateways:
+    - httpbin-gateway-admin
+  hosts:
+    - admin.k-paas-dev01.kr
+  http:
+    - route:
+        - destination:
+            host: kps-web-admin.kps.svc.cluster.local
+            port:
+              number: 8090
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-dev-vs
+  namespace: kps
+spec:
+  gateways:
+    - kps-admin-gateway
+  hosts:
+    - dev.k-paas.org
+  http:
+    - match:
+        - uri:
+            prefix: /kpsadmin
+      route:
+        - destination:
+            host: kps-web-admin.kps.svc.cluster.local
+            port:
+              number: 8090
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: kps-web-user.kps.svc.cluster.local
+            port:
+              number: 8080
+---
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: httpbin-gateway-user-kps-test
+  namespace: kps
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - test.k-paas.org
+      port:
+        name: http-test
+        number: 80
+        protocol: HTTP
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kps-web-user-vs-test
+  namespace: kps
+spec:
+  gateways:
+    - httpbin-gateway-user-kps-test
+  hosts:
+    - test.k-paas.org
+  http:
+    - name: kps-web-user
+      route:
+        - destination:
+            host: kps-web-user.kps.svc.cluster.local
+            port:
+              number: 8080
